@@ -2,9 +2,7 @@ package com.cmed.prescription.controller;
 
 import com.cmed.prescription.model.Patient;
 import com.cmed.prescription.model.Prescription;
-import com.cmed.prescription.model.PrescriptionReqBody;
 import com.cmed.prescription.model.User;
-import com.cmed.prescription.repo.PrescriptionRepository;
 import com.cmed.prescription.service.JwtUserDetailsService;
 import com.cmed.prescription.service.PatientDetailsService;
 import com.cmed.prescription.service.PrescriptionService;
@@ -34,25 +32,20 @@ public class PrescriptionController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<?> savePrescription(@RequestBody PrescriptionReqBody prescriptionReqBody) {
+    public ResponseEntity<?> savePrescription(@RequestBody Prescription prescription) {
 
-        Patient patient = patientDetailsService.findPatientById(prescriptionReqBody.getPatientId());
+        Patient patient = patientDetailsService.findPatientById(prescription.getPatientId());
 
-        User user = userDetailsService.findUserById(prescriptionReqBody.getUserId());
+        User user = userDetailsService.findUserById(prescription.getUserId());
 
         if(patient == null || user == null) {
             return ResponseEntity.notFound().build();
         }
 
-        Prescription newPrescription = new Prescription();
-        newPrescription.setCreatedAt(prescriptionReqBody.getCreatedAt());
-        newPrescription.setDiagnosis(prescriptionReqBody.getDiagnosis());
-        newPrescription.setMedicines(prescriptionReqBody.getMedicines());
-        newPrescription.setNextVisitDate(prescriptionReqBody.getNextVisitDate());
-        newPrescription.setPatient(patient);
-        newPrescription.setUser(user);
+        prescription.setUser(user);
+        prescription.setPatient(patient);
 
-        prescriptionService.save(newPrescription);
+        prescriptionService.save(prescription);
 
         return ResponseEntity.ok(prescriptionService.getAllPrescriptions());
     }

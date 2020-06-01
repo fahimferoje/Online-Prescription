@@ -31,6 +31,12 @@ public class Prescription {
     //@Column(name = "PATIENT_ID")
     private Patient patient;
 
+    @Transient
+    private Long patientId;
+
+    @Transient
+    private Long userId;
+
     public Long getId() {
         return id;
     }
@@ -85,6 +91,22 @@ public class Prescription {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
