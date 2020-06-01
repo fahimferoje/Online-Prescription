@@ -8,12 +8,16 @@ import com.cmed.prescription.service.PatientDetailsService;
 import com.cmed.prescription.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/prescription")
+@Validated
 public class PrescriptionController {
 
     @Autowired
@@ -31,7 +35,7 @@ public class PrescriptionController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<?> savePrescription(@RequestBody Prescription prescription) {
+    public ResponseEntity<?> savePrescription(@Valid @RequestBody Prescription prescription) {
 
         Patient patient = patientDetailsService
                 .findPatientById(prescription.getPatientId());
@@ -51,7 +55,7 @@ public class PrescriptionController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> editPrescription(@PathVariable("id") Long id, @RequestBody Prescription prescription) {
+    public ResponseEntity<?> editPrescription(@PathVariable("id") @Min(1) Long id, @RequestBody Prescription prescription) {
 
         Optional<Prescription> prescriptionOp = prescriptionService.findById(id);
 
@@ -84,7 +88,7 @@ public class PrescriptionController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deletePrescription(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deletePrescription(@PathVariable("id") @Min(1) Long id) {
 
         Optional<Prescription> prescriptionOp = prescriptionService.findById(id);
 

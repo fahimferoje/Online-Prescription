@@ -1,6 +1,7 @@
 package com.cmed.prescription.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,9 +14,11 @@ public class Prescription {
     private Long id;
 
     @Column
+    @NotEmpty(message = "Please provide diagnosis")
     private String diagnosis;
 
     @Column
+    @NotEmpty(message = "Please provide medicines")
     private String medicines;
 
     @Column(name = "NEXT_VISIT_DATE")
