@@ -1,0 +1,115 @@
+package com.cmed.prescription.model;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.Objects;
+
+@Entity
+@Table(name = "PRESCRIPTION")
+public class Prescription {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column
+    private String diagnosis;
+
+    @Column
+    private String medicines;
+
+    @Column(name = "NEXT_VISIT_DATE")
+    private Date nextVisitDate;
+
+    @Column(name = "CREATED_AT")
+    private Date createdAt;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    //@Column(name = "PATIENT_ID")
+    private Patient patient;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getMedicines() {
+        return medicines;
+    }
+
+    public void setMedicines(String medicine) {
+        this.medicines = medicine;
+    }
+
+    public Date getNextVisitDate() {
+        return nextVisitDate;
+    }
+
+    public void setNextVisitDate(Date nextVisitDate) {
+        this.nextVisitDate = nextVisitDate;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prescription that = (Prescription) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "id=" + id +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", medicine='" + medicines + '\'' +
+                ", nextVisitDate=" + nextVisitDate +
+                ", createdAt=" + createdAt +
+                ", createdBy=" + user +
+                ", patient=" + patient +
+                '}';
+    }
+}

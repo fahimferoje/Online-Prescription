@@ -3,6 +3,7 @@ package com.cmed.prescription.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -18,6 +19,9 @@ public class User {
     @Column
     @JsonIgnore
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Prescription> prescriptions;
 
     public String getUsername() {
         return username;

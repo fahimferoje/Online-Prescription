@@ -1,6 +1,7 @@
 package com.cmed.prescription.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,6 +27,9 @@ public class Patient {
     @Column(columnDefinition = "enum('MALE','FEMALE', 'OTHERS')")
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Prescription> prescriptions;
 
 
     public Long getId() {
