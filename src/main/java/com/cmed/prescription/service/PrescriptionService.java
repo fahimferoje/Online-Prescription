@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PrescriptionService {
@@ -21,5 +22,9 @@ public class PrescriptionService {
 
     public void save(Prescription newPrescription) {
         prescriptionRepository.save(newPrescription);
+    }
+
+    public Optional<Prescription> findById(Long id) {
+        return prescriptionRepository.findById(id);
     }
 }
