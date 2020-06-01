@@ -83,6 +83,22 @@ public class PrescriptionController {
         return ResponseEntity.ok(prescriptionService.getAllPrescriptions());
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deletePrescription(@PathVariable("id") Long id) {
+
+        Optional<Prescription> prescriptionOp = prescriptionService.findById(id);
+
+        if(!prescriptionOp.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Prescription prescriptionEntity = prescriptionOp.get();
+
+        prescriptionService.deleteById(prescriptionEntity.getId());
+
+        return ResponseEntity.ok(prescriptionService.getAllPrescriptions());
+    }
+
 
 
 }

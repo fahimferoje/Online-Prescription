@@ -27,4 +27,8 @@ public class PrescriptionService {
     public Optional<Prescription> findById(Long id) {
         return prescriptionRepository.findById(id);
     }
+
+    public void deleteById(Long id) {
+        prescriptionRepository.deleteById(id);
+    }
 }
