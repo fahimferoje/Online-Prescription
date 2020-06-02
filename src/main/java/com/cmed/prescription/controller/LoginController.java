@@ -41,4 +41,10 @@ public class LoginController {
 
         return pres.isPresent() ? pres.get() : null;
     }
+
+    @DeleteMapping("/deleteById/{id}")
+    public String deletePrescriptionById(@PathVariable  Long id) {
+        prescriptionService.deleteById(id);
+        return "redirect:/prescription";
+    }
 }
