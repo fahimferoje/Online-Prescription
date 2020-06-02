@@ -10,4 +10,9 @@ public class LoginController {
     public String viewLogin2() {
         return "login";
     }
+
+    @GetMapping("/prescription")
+    public String viewPrescription() {
+        return "prescription";
+    }
 }
