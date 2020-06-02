@@ -55,28 +55,11 @@ $(document).ready(function () {
             cache: false,
             timeout: 600000,
             success: function (data) {
-                console.log('data.................');
-                console.log(data)
-
-                // var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-                //     + JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
-                // $('#feedback').html(json);
-                //
-                // console.log("SUCCESS : ", data);
-                // $("#btn-search").prop("disabled", false);
-
+                sessionStorage.setItem('token', data.token);
+                window.location.href = "http://localhost:8080/prescription";
              },
              error: function (e) {
-
                  console.log(e);
-
-                // var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-                //     + e.responseText + "&lt;/pre&gt;";
-                // $('#feedback').html(json);
-                //
-                // console.log("ERROR : ", e);
-                // $("#btn-search").prop("disabled", false);
-
             }
         });
 
