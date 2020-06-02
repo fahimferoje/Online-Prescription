@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <script type="application/javascript" th:src="@{main.js}" src="../static/main.js"></script>
 
 </head>
 <body>
@@ -63,9 +64,8 @@
                     <td th:text="${pres.createdAt}"></td>
                     <td th:text="${pres.nextVisitDate}"></td>
                     <td>
-                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                        <a th:href="@{findOne/(id=${pres.id})}" class="btn btn-success editBtn" data-toggle="modal"><i class="fas fa-edit"></i></a>
                         <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                        <a th:href="@{edit/{id}(id=${pres.id})}"><i class="far fa-trash-alt"></i> Edit</a>
                     </td>
                 </tr>
                 </tbody>
@@ -73,6 +73,6 @@
         </div>
     </div>
 </div>
-
+<th:block th:include="/edit-view"></th:block>
 </body>
 </html>

@@ -38,7 +38,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/prescription")
+                .defaultSuccessUrl("/prescription", true)
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

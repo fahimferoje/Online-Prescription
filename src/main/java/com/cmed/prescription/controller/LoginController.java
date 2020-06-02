@@ -1,13 +1,14 @@
 package com.cmed.prescription.controller;
 
+import com.cmed.prescription.model.Prescription;
 import com.cmed.prescription.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -32,11 +33,12 @@ public class LoginController {
         return modelAndView;
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView editPrescription(@PathVariable("id") Long presId) {
+    @GetMapping("/findOne")
+    @ResponseBody
+    public Prescription findPrescriptionById(Long id) {
 
-        ModelAndView modelAndView = new ModelAndView();
+        Optional<Prescription> pres = prescriptionService.findById(id);
 
-        return modelAndView;
+        return pres.isPresent() ? pres.get() : null;
     }
 }
