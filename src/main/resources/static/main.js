@@ -6,15 +6,15 @@ $(document).ready(function () {
 
         const href = $(this).attr('href');
 
-        console.log(href);
-
         $.get(href, function (prescription, status) {
 
-            console.log('============');
             console.log(prescription);
-            console.log('Diagnosis '+prescription.diagnosis);
 
-            $('.myForm #medicine').val(prescription.diagnosis);
+            const { diagnosis, medicines, createdAt, nextVisitDate, patient } = prescription;
+
+            $('.editForm #diagnosis').val(diagnosis);
+            $('.editForm #medicine').val(medicines);
+            $('.editForm #nextVisitDate').val("2020-06-02T11:42:13.510");
 
         });
 
