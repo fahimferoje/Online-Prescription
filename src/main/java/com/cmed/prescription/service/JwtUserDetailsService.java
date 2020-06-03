@@ -21,10 +21,14 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
 
+    public User findUserByUserName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username);
+        User user = findUserByUserName(username);
 
         if(user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);

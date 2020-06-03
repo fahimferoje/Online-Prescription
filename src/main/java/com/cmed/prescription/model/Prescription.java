@@ -38,6 +38,9 @@ public class Prescription {
     private Long patientId;
 
     @Transient
+    private String nextVisitDateString;
+
+    @Transient
     private Long userId;
 
     public Long getId() {
@@ -110,6 +113,14 @@ public class Prescription {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getNextVisitDateString() {
+        return nextVisitDateString;
+    }
+
+    public void setNextVisitDateString(String nextVisitDateString) {
+        this.nextVisitDateString = nextVisitDateString;
     }
 
     @Override
