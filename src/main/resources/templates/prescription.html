@@ -48,7 +48,28 @@
     </div>
 </nav>
 <div class="container">
-    <button class="btn btn-success newButton">New</button>
+
+    <div class="row">
+        <div class="col-6">
+            <button class="btn btn-success newButton">New</button>
+        </div>
+        <div class="col-6">
+            <form method="post" th:object="${dateRange}" th:action="@{/search}">
+                <div class="form-group row">
+                    <div class="col-md-4 mt-5">
+                        <label for="dateRange">Search by Prescription created at.</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="dateRange" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <input type="hidden" name="dateFrom" th:field="*{dateFrom}"/>
+                    <input type="hidden" name="dateTo" th:field="*{dateTo}"/>
+                </div>
+                <button class="btn btn-primary" type="submit">Search</button>
+                <a th:href="@{/prescription}" class="btn btn-primary" type="button">Reset</a>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <table class="table table-bordered">
@@ -96,26 +117,27 @@
             </table>
         </div>
     </div>
+
 </div>
 <th:block th:include="/edit-view"></th:block>
 
-<div class="container">
-    <form method="post" th:object="${dateRange}" th:action="@{/search}">
-        <div class="form-group row">
-            <div class="col-md-4 mt-5">
-                <label for="dateRange">Search by Prescription created at.</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="dateRange" autocomplete="off"/>
-                </div>
-            </div>
-            <input type="hidden" name="dateFrom" th:field="*{dateFrom}"/>
-            <input type="hidden" name="dateTo" th:field="*{dateTo}"/>
-        </div>
-        <button class="btn btn-primary" type="submit">Search</button>
-        <a th:href="@{/prescription}" class="btn btn-primary" type="button">Reset</a>
-    </form>
+<!--<div class="container">-->
+<!--    <form method="post" th:object="${dateRange}" th:action="@{/search}">-->
+<!--        <div class="form-group row">-->
+<!--            <div class="col-md-4 mt-5">-->
+<!--                <label for="dateRange">Search by Prescription created at.</label>-->
+<!--                <div class="input-group">-->
+<!--                    <input type="text" class="form-control" id="dateRange" autocomplete="off"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <input type="hidden" name="dateFrom" th:field="*{dateFrom}"/>-->
+<!--            <input type="hidden" name="dateTo" th:field="*{dateTo}"/>-->
+<!--        </div>-->
+<!--        <button class="btn btn-primary" type="submit">Search</button>-->
+<!--        <a th:href="@{/prescription}" class="btn btn-primary" type="button">Reset</a>-->
+<!--    </form>-->
 
-</div>
+<!--</div>-->
 
 </body>
 </html>
