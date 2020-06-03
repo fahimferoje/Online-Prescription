@@ -21,9 +21,11 @@ public class Prescription {
     @NotEmpty(message = "Please provide medicines")
     private String medicines;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "NEXT_VISIT_DATE")
     private Date nextVisitDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "CREATED_AT")
     private Date createdAt;
 
