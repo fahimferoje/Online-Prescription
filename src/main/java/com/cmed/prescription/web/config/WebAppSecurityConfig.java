@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService jwtUserDetailsService;
