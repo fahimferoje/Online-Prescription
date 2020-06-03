@@ -23,12 +23,6 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
-
-    @Autowired
-    private PatientDetailsService patientDetailsService;
-
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPrescriptions() {
         return ResponseEntity.ok(prescriptionService.getAllPrescriptions());
