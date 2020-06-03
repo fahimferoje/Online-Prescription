@@ -1,6 +1,19 @@
-package com.cmed.prescription.web.controller;
+package com.cmed.prescription.restapi.controller;
 
-/**@RestController
+import com.cmed.prescription.restapi.config.JwtTokenUtil;
+import com.cmed.prescription.web.model.JwtRequest;
+import com.cmed.prescription.web.model.JwtResponse;
+import com.cmed.prescription.web.service.JwtUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
 @CrossOrigin
 @RequestMapping("/api/v1")
 public class JwtAuthenticationController {
@@ -14,7 +27,7 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -36,9 +49,4 @@ public class JwtAuthenticationController {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
-
-//    @RequestMapping(value = "/register", method = RequestMethod.POST)
-////    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-////        return ResponseEntity.ok(userDetailsService.save(user));
-////    }
-}**/
+}
