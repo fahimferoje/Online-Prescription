@@ -2,14 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Online Prescription</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     <script type="application/javascript" th:src="@{main.js}" src="../static/main.js"></script>
 
 </head>
@@ -93,5 +98,24 @@
     </div>
 </div>
 <th:block th:include="/edit-view"></th:block>
+
+<div class="container">
+    <form method="post" th:object="${dateRange}" th:action="@{/search}">
+        <div class="form-group row">
+            <div class="col-md-4 mt-5">
+                <label for="dateRange">Search by Prescription created at.</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="dateRange" autocomplete="off"/>
+                </div>
+            </div>
+            <input type="hidden" name="dateFrom" th:field="*{dateFrom}"/>
+            <input type="hidden" name="dateTo" th:field="*{dateTo}"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+        <a th:href="@{/prescription}" class="btn btn-primary" type="button">Reset</a>
+    </form>
+
+</div>
+
 </body>
 </html>
