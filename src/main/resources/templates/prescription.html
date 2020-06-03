@@ -85,7 +85,15 @@
                 </thead>
                 <tbody>
                 <tr th:each="pres : ${prescriptions}">
-                    <td th:text="${pres.patient.name}"></td>
+                    <td>
+                        <form>
+                            <input type="text" th:value="${pres.patient.name}" readonly style="border: none">
+                            <br>
+                            <input type="text" th:value="${'Age: '+pres.patient.age}" readonly style="border: none">
+                            <br>
+                            <input type="text" th:value="${'Gender: '+pres.patient.gender}" readonly style="border: none">
+                        </form>
+                    </td>
                     <td th:text="${pres.diagnosis}"></td>
                     <td th:text="${pres.medicines}"></td>
                     <td th:text="${#dates.format(pres.createdAt, 'dd MMM, yyyy')}"></td>
@@ -118,26 +126,13 @@
         </div>
     </div>
 
+    <a th:href="@{/daily_prescription_count}" class="btn btn-primary showDailyReportBtn" data-toggle="modal">
+        Show Daily Report
+    </a>
 </div>
+
 <th:block th:include="/edit-view"></th:block>
 
-<!--<div class="container">-->
-<!--    <form method="post" th:object="${dateRange}" th:action="@{/search}">-->
-<!--        <div class="form-group row">-->
-<!--            <div class="col-md-4 mt-5">-->
-<!--                <label for="dateRange">Search by Prescription created at.</label>-->
-<!--                <div class="input-group">-->
-<!--                    <input type="text" class="form-control" id="dateRange" autocomplete="off"/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <input type="hidden" name="dateFrom" th:field="*{dateFrom}"/>-->
-<!--            <input type="hidden" name="dateTo" th:field="*{dateTo}"/>-->
-<!--        </div>-->
-<!--        <button class="btn btn-primary" type="submit">Search</button>-->
-<!--        <a th:href="@{/prescription}" class="btn btn-primary" type="button">Reset</a>-->
-<!--    </form>-->
-
-<!--</div>-->
-
+<th:block th:include="/daily-prescription-count"></th:block>
 </body>
 </html>

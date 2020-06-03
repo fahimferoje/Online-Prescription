@@ -37,6 +37,31 @@ $(document).ready(function () {
 
     });
 
+    $('.showDailyReportBtn').on('click',function (ev) {
+
+        ev.preventDefault();
+
+        const href = $(this).attr('href');
+
+        $(".dailyPrescriptionWindow #classTable").find("tr:gt(0)").remove();
+
+        $.get("/daily_prescription_count", function(dailyCountData, status){
+            $.each(dailyCountData, function(i, dailyCount) {
+                const { day, prescriptionCount} = dailyCount;
+                $(".dailyPrescriptionWindow #classTable")
+                    .append("<tr>" +
+                        "<td>" + day + "</td>" +
+                        "<td>" + prescriptionCount + "</td>" +
+                        "</tr>");
+            });
+
+            $('.dailyPrescriptionWindow #dailyPrescriptionModal').modal();
+        });
+
+    });
+
+
+
     const $dateRange = $('#dateRange');
 
     $dateRange.daterangepicker();
