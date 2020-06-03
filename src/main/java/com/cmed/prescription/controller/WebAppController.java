@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
-public class LoginController {
+public class WebAppController {
 
     @Autowired
     PrescriptionService prescriptionService;
@@ -36,6 +36,11 @@ public class LoginController {
 
     @Autowired
     JwtUserDetailsService userDetailsService;
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
+    }
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public ModelAndView login(){
