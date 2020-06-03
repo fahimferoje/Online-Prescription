@@ -37,4 +37,12 @@ $(document).ready(function () {
 
     });
 
+    const $dateRange = $('#dateRange');
+
+    $dateRange.daterangepicker();
+    $dateRange.on('apply.daterangepicker', function (ev, picker) {
+        $('input[name="dateFrom"]').val(picker.startDate.format('DD/MM/YYYY'));
+        $('input[name="dateTo"]').val(picker.endDate.format('DD/MM/YYYY'));
+    });
+
 });

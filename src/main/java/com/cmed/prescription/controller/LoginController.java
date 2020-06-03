@@ -1,5 +1,6 @@
 package com.cmed.prescription.controller;
 
+import com.cmed.prescription.model.DateRange;
 import com.cmed.prescription.model.Patient;
 import com.cmed.prescription.model.Prescription;
 import com.cmed.prescription.service.JwtUserDetailsService;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,6 +48,10 @@ public class LoginController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("prescriptions", prescriptionService.getAllPrescriptions());
+        DateRange dateRange = new DateRange();
+        dateRange.setDateFrom(new Date());
+        dateRange.setDateTo(new Date());
+        modelAndView.addObject("dateRange", dateRange);
         modelAndView.setViewName("prescription");
 
         return modelAndView;
@@ -86,6 +92,7 @@ public class LoginController {
         }
 
         prescription.setCreatedAt(new Date());
+
         prescription.setPatient(patientDetailsService.findPatientById(prescription.getPatientId()));
 
         prescriptionService.save(prescription);
@@ -97,5 +104,20 @@ public class LoginController {
     @ResponseBody
     public List<Patient> getPatients() {
         return patientDetailsService.findAllPatients();
+    }
+
+    @PostMapping("/search")
+    public ModelAndView searchByDate(DateRange dateRange) {
+
+        List<Prescription> prescriptionList = prescriptionService
+                .findPrescriptionsByDate(dateRange.getDateFrom(), dateRange.getDateTo());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("prescriptions", prescriptionList);
+        modelAndView.addObject("dateRange", dateRange);
+        modelAndView.setViewName("prescription");
+
+        return modelAndView;
+
     }
 }
