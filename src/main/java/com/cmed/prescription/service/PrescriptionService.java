@@ -1,5 +1,6 @@
 package com.cmed.prescription.service;
 
+import com.cmed.prescription.model.DailyPrescriptionCount;
 import com.cmed.prescription.model.Patient;
 import com.cmed.prescription.model.Prescription;
 import com.cmed.prescription.repo.PrescriptionRepository;
@@ -35,5 +36,9 @@ public class PrescriptionService {
 
     public List<Prescription> findPrescriptionsByDate(Date dateFrom, Date dateTo) {
         return prescriptionRepository.findPrescriptionsByDate(dateFrom, dateTo);
+    }
+
+    public List<DailyPrescriptionCount> findPrescriptionsDailyCount() {
+        return prescriptionRepository.getPrescriptionsDailyCount();
     }
 }

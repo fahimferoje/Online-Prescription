@@ -1,5 +1,6 @@
 package com.cmed.prescription.controller;
 
+import com.cmed.prescription.model.DailyPrescriptionCount;
 import com.cmed.prescription.model.DateRange;
 import com.cmed.prescription.model.Patient;
 import com.cmed.prescription.model.Prescription;
@@ -118,6 +119,11 @@ public class LoginController {
         modelAndView.setViewName("prescription");
 
         return modelAndView;
+    }
 
+    @GetMapping("/daily_prescription_count")
+    @ResponseBody
+    public List<DailyPrescriptionCount> getDailyPrescriptionsCount() {
+        return prescriptionService.findPrescriptionsDailyCount();
     }
 }

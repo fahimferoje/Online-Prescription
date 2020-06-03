@@ -7,6 +7,20 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "PRESCRIPTION")
+@SqlResultSetMappings({
+        @SqlResultSetMapping(name = "DailyPrescriptionCount",
+                classes = {
+                        @ConstructorResult(
+                                targetClass = DailyPrescriptionCount.class,
+                                columns = {
+                                        @ColumnResult(name = "day",type = String.class),
+                                        @ColumnResult(name = "prescriptionCount", type = Integer.class)
+                                }
+                        )
+                }
+        )
+})
+@NamedNativeQuery(name="Prescription.getPrescriptionsDailyCount", query="SELECT DATE_FORMAT(`CREATED_AT`,'%d-%m-%Y') AS day, COUNT(`ID`) AS prescriptionCount FROM PRESCRIPTION GROUP BY  `CREATED_AT`;", resultSetMapping="DailyPrescriptionCount")
 public class Prescription {
 
     @Id

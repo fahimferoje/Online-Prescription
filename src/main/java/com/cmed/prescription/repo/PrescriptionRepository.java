@@ -1,5 +1,6 @@
 package com.cmed.prescription.repo;
 
+import com.cmed.prescription.model.DailyPrescriptionCount;
 import com.cmed.prescription.model.Patient;
 import com.cmed.prescription.model.Prescription;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
     @Query("SELECT ps FROM Prescription ps WHERE ps.createdAt BETWEEN :startDate AND :endDate")
     List<Prescription> findPrescriptionsByDate(@Param("startDate") Date startDate
             , @Param("endDate") Date endDate);
+
+    @Query(nativeQuery = true)
+    List<DailyPrescriptionCount> getPrescriptionsDailyCount();
 }
