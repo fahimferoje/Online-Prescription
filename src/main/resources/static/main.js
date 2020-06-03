@@ -7,7 +7,6 @@ $(document).ready(function () {
         $.get("/patients", function(patients, status){
             $('.editForm #patientId').empty();
             $.each(patients, function(i, patient) {
-                console.log('Appending patient');
                 $('.editForm #patientId').append($('<option></option>').val(patient.id).html(patient.name));
             });
         });
@@ -24,11 +23,13 @@ $(document).ready(function () {
         else {
             $.get(href, function (prescription, status) {
 
-                const { diagnosis, medicines, createdAt, nextVisitDate, patient } = prescription;
+                const {id, diagnosis, medicines, createdAt, nextVisitDate, patient } = prescription;
 
+                $('.editForm #id').val(id);
                 $('.editForm #diagnosis').val(diagnosis);
-                $('.editForm #medicine').val(medicines);
-                $('.editForm #nextVisitDate').val("2020-06-02T11:42:13.510");
+                $('.editForm #medicines').val(medicines);
+                $('.editForm #nextVisitDateString').val(nextVisitDate);
+                $('.editForm #patientId').val(patient.id);
 
             });
             $('.editForm #exampleModal').modal();
