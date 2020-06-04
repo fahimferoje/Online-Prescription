@@ -60,8 +60,6 @@ $(document).ready(function () {
 
     });
 
-
-
     const $dateRange = $('#dateRange');
 
     $dateRange.daterangepicker();

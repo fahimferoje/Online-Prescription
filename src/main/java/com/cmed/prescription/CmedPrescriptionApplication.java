@@ -1,4 +1,4 @@
-package com.cmed.prescription.web;
+package com.cmed.prescription;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

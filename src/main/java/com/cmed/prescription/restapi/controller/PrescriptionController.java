@@ -23,7 +23,8 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping
+    @ResponseBody
     public ResponseEntity<?> getAllPrescriptions() {
         return ResponseEntity.ok(prescriptionService.getAllPrescriptions());
     }
