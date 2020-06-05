@@ -37,9 +37,4 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 new ArrayList<>());
     }
-
-    public User findUserById(Long userId) {
-        Optional<User> userOp = userRepository.findById(userId);
-        return userOp.isPresent() ? userOp.get() : null;
-    }
 }
