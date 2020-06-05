@@ -1,5 +1,5 @@
 
-INSERT INTO `USER`(`ID`, `USERNAME`, `PASSWORD`) VALUES (10, 'doctor', '$2y$12$/HVZq.cgdpdEhAJwkREMlurYJ3rILhZkaH57h72GSecGUi3sVAa0.');
+INSERT INTO `USER`(`ID`, `USERNAME`, `PASSWORD`) VALUES (10, 'doctor@cmed.com', '$2y$12$zEheNevKII4j3qE/KrJ.7echHDceUFnCDefyc.rsUaA.35n9zg51O');
 
 
 INSERT INTO `PATIENT`(`ID`, `NAME`, `AGE`, `GENDER`) VALUES (1, 'patient 1', 30, 'MALE');
