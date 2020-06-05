@@ -33,8 +33,8 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/login.css", "/login.js").permitAll()
+                .antMatchers().permitAll()
+                .antMatchers("/login","/login.css", "/login.js", "/api_consume").permitAll()
                 .anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
@@ -60,3 +60,4 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+
