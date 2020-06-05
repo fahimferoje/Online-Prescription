@@ -84,9 +84,7 @@ public class WebAppController {
             prescription.setNextVisitDate(date);
         }
         catch (Exception e) {
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DAY_OF_MONTH, 7);
-            prescription.setNextVisitDate(cal.getTime());
+            prescription.setNextVisitDate(null);
         }
 
         prescription.setCreatedAt(new Date());
