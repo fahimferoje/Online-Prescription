@@ -14,8 +14,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>-->
+    
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
     <script type="application/javascript" th:src="@{validation.js}" src="../static/validation.js"></script>
     <script type="application/javascript" th:src="@{main.js}" src="../static/main.js"></script>
@@ -55,14 +55,11 @@
 </nav>
 <div class="container">
 
-    <div class="row">
-        <div class="col-6">
-            <button class="btn btn-success newButton">New</button>
-        </div>
-        <div class="col-6">
+    <div>
+        <div class="row col-md-6 col-md-offset-10">
             <form method="post" th:object="${dateRange}" th:action="@{/search}">
                 <div class="form-group row">
-                    <div class="col-md-4 mt-5">
+                    <div class="col-md-4.5">
                         <label for="dateRange">Search by Prescription created at.</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="dateRange" autocomplete="off"/>
@@ -74,6 +71,9 @@
                 <button class="btn btn-primary" type="submit">Search</button>
                 <a th:href="@{/prescription}" class="btn btn-primary" type="button">Reset</a>
             </form>
+        </div>
+        <div class="row">
+            <button class="btn btn-success newButton">New</button>
         </div>
     </div>
     <div class="row">
@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <a th:href="@{/daily_prescription_count}" class="btn btn-primary showDailyReportBtn" data-toggle="modal">
+    <a th:href="@{/daily_prescription_count}" class="row btn btn-primary showDailyReportBtn" data-toggle="modal">
         Show Daily Report
     </a>
 </div>
