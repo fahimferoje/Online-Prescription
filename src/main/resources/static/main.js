@@ -15,12 +15,14 @@ $(document).ready(function () {
         const buttonText = $(this).text();
 
         if(buttonText === 'New') {
+            $('.editForm #addEditPrescLabel').text('Add Prescription');
             $('.editForm #diagnosis').val('');
             $('.editForm #medicine').val('');
             $('.editForm #nextVisitDate').val('');
             $('.editForm #exampleModal').modal();
         }
         else {
+            $('.editForm #addEditPrescLabel').text('Edit Prescription');
             $.get(href, function (prescription, status) {
 
                 const {id, diagnosis, medicines, createdAt, nextVisitDate, patient } = prescription;
