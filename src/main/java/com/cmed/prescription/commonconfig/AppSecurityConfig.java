@@ -1,4 +1,4 @@
-package com.cmed.prescription.config;
+package com.cmed.prescription.commonconfig;
 
 import com.cmed.prescription.restapi.config.JwtAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;

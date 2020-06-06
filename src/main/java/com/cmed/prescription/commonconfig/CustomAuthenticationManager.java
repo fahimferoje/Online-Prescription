@@ -1,4 +1,4 @@
-package com.cmed.prescription.config;
+package com.cmed.prescription.commonconfig;
 
 import com.cmed.prescription.restapi.config.JwtTokenUtil;
 import com.cmed.prescription.web.service.JwtUserDetailsService;

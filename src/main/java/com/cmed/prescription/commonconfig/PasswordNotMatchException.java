@@ -1,4 +1,4 @@
-package com.cmed.prescription.config;
+package com.cmed.prescription.commonconfig;
 
 import org.springframework.security.core.AuthenticationException;
 
