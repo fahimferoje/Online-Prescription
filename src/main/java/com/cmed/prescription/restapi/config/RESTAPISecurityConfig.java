@@ -14,8 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**@Configuration
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,7 +28,14 @@ public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService jwtUserDetailsService;
 
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private CustomAuthenticationManager customAuthenticationManager;
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+
+        auth.authenticationProvider(customAuthenticationManager);
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,26 +50,31 @@ public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf().disable()
-                // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/prescription","/hello.js","/login.css","/login.js","/","/api/v1/login").permitAll().
-                // all other requests need to be authenticated
-                        anyRequest()
-                .authenticated()
-                .and().
-                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.
+                authorizeRequests()
+                .antMatchers().permitAll()
+                .antMatchers("/login","/login.css", "/login.js", "/api_consume", "/api/v1/token", "/authenticate").permitAll()
+                .anyRequest()
+                .authenticated().and().csrf().disable().formLogin()
+                .loginPage("/login").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/prescription", true)
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .and().logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
+                .logoutSuccessUrl("/").and()
+                .exceptionHandling();
 
         // Add a filter to validate the tokens with every request
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        //httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-}**/
+}
