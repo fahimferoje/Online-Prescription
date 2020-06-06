@@ -1,7 +1,6 @@
 package com.cmed.prescription.web.service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import com.cmed.prescription.web.model.User;
 import com.cmed.prescription.web.repo.UserRepository;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class APIConsumeController {
 
-    @GetMapping("/api_consume")
+    @GetMapping("/api-consume")
     public String method() {
        return "api-consume";
     }
