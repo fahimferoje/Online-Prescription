@@ -105,7 +105,7 @@
                     <td th:text="${#dates.format(pres.createdAt, 'dd MMM, yyyy')}"></td>
                     <td th:text="${#dates.format(pres.nextVisitDate, 'dd MMM, yyyy')}"></td>
                     <td>
-                        <a th:href="@{findOne/(id=${pres.id})}" class="btn btn-success editBtn" data-toggle="modal"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{find-one/(id=${pres.id})}" class="btn btn-success editBtn" data-toggle="modal"><i class="fas fa-edit"></i></a>
                         <a data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${pres.id }" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                         <div class="modal modal-warning fade in" th:id="modal-warning+${pres.id }" >
                             <div class="modal-dialog">
@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <a th:href="@{/daily_prescription_count}" class="row btn btn-primary showDailyReportBtn" data-toggle="modal">
+    <a th:href="@{/daily-prescription-count}" class="row btn btn-primary showDailyReportBtn" data-toggle="modal">
         Show Daily Report
     </a>
 </div>

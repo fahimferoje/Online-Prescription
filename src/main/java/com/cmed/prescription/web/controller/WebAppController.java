@@ -55,7 +55,7 @@ public class WebAppController {
         return modelAndView;
     }
 
-    @GetMapping("/findOne")
+    @GetMapping("/find-one")
     @ResponseBody
     public Prescription findPrescriptionById(Long id) {
 
@@ -116,7 +116,7 @@ public class WebAppController {
         return modelAndView;
     }
 
-    @GetMapping("/daily_prescription_count")
+    @GetMapping("/daily-prescription-count")
     @ResponseBody
     public List<DailyPrescriptionCount> getDailyPrescriptionsCount() {
         return prescriptionService.findPrescriptionsDailyCount();
