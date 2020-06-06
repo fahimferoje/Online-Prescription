@@ -1,52 +1,36 @@
 package com.cmed.prescription.restapi.controller;
 
+import com.cmed.prescription.restapi.config.CustomAuthenticationManager;
 import com.cmed.prescription.restapi.config.JwtTokenUtil;
 import com.cmed.prescription.web.model.JwtRequest;
 import com.cmed.prescription.web.model.JwtResponse;
 import com.cmed.prescription.web.service.JwtUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1")
 public class JwtAuthenticationController {
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    private final CustomAuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
-
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+    public JwtAuthenticationController(CustomAuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 
-    private void authenticate(String username, String password) throws Exception {
-        try {
-            //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        }
+    @RequestMapping(value = "/api/v1/token", method = RequestMethod.POST)
+    public ResponseEntity getToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+
+        UsernamePasswordAuthenticationToken upAuthToken = (UsernamePasswordAuthenticationToken) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                authenticationRequest.getEmail()
+                , authenticationRequest.getPassword()));
+
+        return ResponseEntity.ok(new JwtResponse(upAuthToken.getCredentials().toString()));
     }
 }
