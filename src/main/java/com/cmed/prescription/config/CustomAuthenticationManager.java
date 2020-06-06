@@ -2,12 +2,10 @@ package com.cmed.prescription.config;
 
 import com.cmed.prescription.restapi.config.JwtTokenUtil;
 import com.cmed.prescription.web.service.JwtUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -15,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthenticationManager implements AuthenticationProvider {
 
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private final JwtUserDetailsService userDetailsService;
 
-    //@Autowired
-    //private PasswordEncoder passwordEncoder;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    public CustomAuthenticationManager(JwtUserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil) {
+        this.userDetailsService = userDetailsService;
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -41,14 +39,8 @@ public class CustomAuthenticationManager implements AuthenticationProvider {
 
         String token = jwtTokenUtil.generateToken(userDetails);
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken((String) authentication.getPrincipal(), token
-                        , userDetails.getAuthorities());
-
-        SecurityContextHolder.getContext()
-                .setAuthentication(usernamePasswordAuthenticationToken);
-
-        return usernamePasswordAuthenticationToken;
+        return new UsernamePasswordAuthenticationToken((String) authentication.getPrincipal(), token
+                , userDetails.getAuthorities());
     }
 
     @Override
