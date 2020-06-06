@@ -21,14 +21,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Autowired
-    private UserDetailsService jwtUserDetailsService;
+    private final UserDetailsService jwtUserDetailsService;
 
-    @Autowired
-    private CustomAuthenticationManager customAuthenticationManager;
+    private final CustomAuthenticationManager customAuthenticationManager;
+
+    public RESTAPISecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, UserDetailsService jwtUserDetailsService, CustomAuthenticationManager customAuthenticationManager) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtUserDetailsService = jwtUserDetailsService;
+        this.customAuthenticationManager = customAuthenticationManager;
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth)
@@ -39,9 +42,6 @@ public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // configure AuthenticationManager so that it knows from where to load
-        // user for matching credentials
-        // Use BCryptPasswordEncoder
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -50,11 +50,6 @@ public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -73,8 +68,5 @@ public class RESTAPISecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
                 .logoutSuccessUrl("/").and()
                 .exceptionHandling();
-
-        // Add a filter to validate the tokens with every request
-        //httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
