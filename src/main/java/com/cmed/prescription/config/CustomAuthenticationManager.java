@@ -34,7 +34,7 @@ public class CustomAuthenticationManager implements AuthenticationProvider {
                 , userDetails.getPassword());
 
         if (!matched) {
-            throw new PasswordNotMatchException("Credentials does not match");
+            throw new PasswordNotMatchException("Incorrect Email or Password");
         }
 
         String token = jwtTokenUtil.generateToken(userDetails);
