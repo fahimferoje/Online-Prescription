@@ -1,17 +1,10 @@
 package com.cmed.prescription.restapi.controller;
 
-import com.cmed.prescription.restapi.config.CustomAuthenticationManager;
-import com.cmed.prescription.restapi.config.JwtTokenUtil;
+import com.cmed.prescription.config.CustomAuthenticationManager;
 import com.cmed.prescription.web.model.JwtRequest;
 import com.cmed.prescription.web.model.JwtResponse;
-import com.cmed.prescription.web.service.JwtUserDetailsService;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

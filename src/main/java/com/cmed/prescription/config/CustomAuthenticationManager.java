@@ -1,5 +1,6 @@
-package com.cmed.prescription.restapi.config;
+package com.cmed.prescription.config;
 
+import com.cmed.prescription.restapi.config.JwtTokenUtil;
 import com.cmed.prescription.web.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

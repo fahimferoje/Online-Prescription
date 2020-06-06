@@ -1,4 +1,4 @@
-package com.cmed.prescription.restapi.config;
+package com.cmed.prescription.config;
 
 import org.springframework.security.core.AuthenticationException;
 
