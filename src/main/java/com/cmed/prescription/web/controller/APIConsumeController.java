@@ -8,7 +8,7 @@ public class APIConsumeController {
 
     @GetMapping("/api-consume")
     public String exampleAPIConsumption() {
-       return "api-consume-2";
+       return "api-consume";
     }
 
 }
