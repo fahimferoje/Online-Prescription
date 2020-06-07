@@ -70,4 +70,19 @@ $(document).ready(function () {
         $('input[name="dateTo"]').val(picker.endDate.format('DD/MM/YYYY'));
     });
 
+    const MAX_NEXT_VISIT_DATE = 5;
+    const MIN_NEXT_VISIT_DATE = 1;
+
+    $(function(){
+        $('[type="date"]').prop('max', function(){
+            return new Date(new Date().setFullYear(new Date().getFullYear() + MAX_NEXT_VISIT_DATE))
+                .toJSON().split('T')[0];
+        });
+
+        $('[type="date"]').prop('min', function(){
+            return new Date(new Date().setDate(new Date().getDate() + MIN_NEXT_VISIT_DATE))
+                .toJSON().split('T')[0];
+        });
+    });
+
 });
