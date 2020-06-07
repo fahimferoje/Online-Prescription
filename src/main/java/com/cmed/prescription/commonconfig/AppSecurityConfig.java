@@ -55,7 +55,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.
                 authorizeRequests()
                 .antMatchers().permitAll()
-                .antMatchers("/login","/login.css", "/login.js", "/api_consume", "/api/v1/token", "/authenticate").permitAll()
+                .antMatchers("/login","/login.css", "/login.js", "/api-consume", "/api-consume.js", "/api/v1/token").permitAll()
                 .anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
