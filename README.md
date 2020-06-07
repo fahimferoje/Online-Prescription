@@ -1,6 +1,6 @@
 # Online-Prescription
 
-Online prescription system where user can login into the system, can perform CRUD operation on prescription. Able to track daily report on how many prescriptions crreated per day.
+An online prescription system where authorized user can perform CRUD operation on prescription. Able to track daily report on how many prescriptions created per day.
 
 ## Getting Started
  This app holds two part. one part is web and another part is restapi
