@@ -3,13 +3,10 @@ $(document).ready(function () {
     $.get("https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248"
         , function (data, status) {
 
-        console.log('============================Calling================');
-
             const { interactionTypeGroup } = data;
             const { interactionType } = interactionTypeGroup[0];
             const { interactionPair } = interactionType[0];
 
-            console.log(interactionPair);
             const table = $('#example').DataTable({
                 "data": interactionPair,
                 "columns": [
@@ -84,101 +81,5 @@ $(document).ready(function () {
             }
 
     });
-
-    // const dd = [
-    //     {
-    //         "interactionConcept": [
-    //             {
-    //
-    //                 "minConceptItem": {
-    //                     "rxcui": "341248",
-    //                     "name": "ezetimibe",
-    //                     "tty": "IN"
-    //                 },
-    //                 "sourceConceptItem": {
-    //                     "id": "DB00973",
-    //                     "name": "Ezetimibe",
-    //                     "url": "http://www.drugbank.ca/drugs/DB00973#interactions"
-    //                 }
-    //             },
-    //             {
-    //                 "minConceptItem": {
-    //                     "rxcui": "3008",
-    //                     "name": "cyclosporine",
-    //                     "tty": "IN"
-    //                 },
-    //                 "sourceConceptItem": {
-    //                     "id": "DB00091",
-    //                     "name": "Cyclosporine",
-    //                     "url": "http://www.drugbank.ca/drugs/DB00091#interactions"
-    //                 }
-    //             }
-    //         ],
-    //         "severity": "N/A",
-    //         "description": "The serum concentration of Cyclosporine can be increased when it is combined with Ezetimibe."
-    //     },
-    //     {
-    //         "interactionConcept": [
-    //             {
-    //                 "minConceptItem": {
-    //                     "rxcui": "341248",
-    //                     "name": "ezetimibe",
-    //                     "tty": "IN"
-    //                 },
-    //                 "sourceConceptItem": {
-    //                     "id": "DB00973",
-    //                     "name": "Ezetimibe",
-    //                     "url": "http://www.drugbank.ca/drugs/DB00973#interactions"
-    //                 }
-    //             },
-    //             {
-    //                 "minConceptItem": {
-    //                     "rxcui": "290",
-    //                     "name": "adenine",
-    //                     "tty": "IN"
-    //                 },
-    //                 "sourceConceptItem": {
-    //                     "id": "DB00173",
-    //                     "name": "Adenine",
-    //                     "url": "http://www.drugbank.ca/drugs/DB00173#interactions"
-    //                 }
-    //             }
-    //         ],
-    //         "severity": "N/A",
-    //         "description": "The metabolism of Ezetimibe can be decreased when combined with Adenine."
-    //     },
-    //     {
-    //         "interactionConcept": [
-    //             {
-    //                 "minConceptItem": {
-    //                     "rxcui": "341248",
-    //                     "name": "ezetimibe",
-    //                     "tty": "IN"
-    //                 },
-    //                 "sourceConceptItem": {
-    //                     "id": "DB00973",
-    //                     "name": "Ezetimibe",
-    //                     "url": "http://www.drugbank.ca/drugs/DB00973#interactions"
-    //                 }
-    //             },
-    //             {
-    //                 "minConceptItem": {
-    //                     "rxcui": "42463",
-    //                     "name": "pravastatin",
-    //                     "tty": "IN"
-    //                 },
-    //                 "sourceConceptItem": {
-    //                     "id": "DB00175",
-    //                     "name": "Pravastatin",
-    //                     "url": "http://www.drugbank.ca/drugs/DB00175#interactions"
-    //                 }
-    //             }
-    //         ],
-    //         "severity": "N/A",
-    //         "description": "Pravastatin may decrease the excretion rate of Ezetimibe which could result in a higher serum level."
-    //     }
-    // ];
-
-
 });
 
