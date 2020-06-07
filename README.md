@@ -23,18 +23,18 @@ spring.datasource.password = your_db_password
 flyway.user = your_db_username
 flyway.password = your_db_password
 ```
-3. From your cmd/terminal type
+3. From project root folder in cmd/terminal type
 ```
 mvn clean
 mvn spring-boot:run
 ```
 ## To test the webapp application
 
-1. Open your browser and type http://localhost:8080/
+1. Open your browser and hit http://localhost:8080/
 2. Flyway migration will create a default user to log in. In login view set email `doctor@cmed.com` and password `doctor` to log in.
 
 ## To test the api-consume part
-1. you can find api consumption example here http://localhost:8080/api-consume and it is not protected page. you should be able to acess it without login in. 
+1. you can find api consumption example here http://localhost:8080/api-consume and it is not protected page. you should be able to acess it without logging in. 
 
 ## To test the REST API part
 
