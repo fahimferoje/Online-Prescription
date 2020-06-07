@@ -47,7 +47,7 @@ $(document).ready(function () {
 
         $(".dailyPrescriptionWindow #classTable").find("tr:gt(0)").remove();
 
-        $.get("/daily_prescription_count", function(dailyCountData, status){
+        $.get("/daily-prescription-count", function(dailyCountData, status){
             $.each(dailyCountData, function(i, dailyCount) {
                 const { day, prescriptionCount} = dailyCount;
                 $(".dailyPrescriptionWindow #classTable")
